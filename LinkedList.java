@@ -1,3 +1,10 @@
+/*
+	LinkedList
+	-add
+	-printList
+	-reverseList
+	-Node
+*/
 public class LinkedList
 {
 	Node head;

@@ -3,6 +3,7 @@
 	selectionSort
 	bucketSort
 	mergeSort
+    insertionSort
 */
 public class Sort
 {
