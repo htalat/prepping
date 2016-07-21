@@ -1,10 +1,8 @@
-/*	Sort.java
+/*	Sort
 	bubbleSort
 	selectionSort
 	bucketSort
 	mergeSort
-    quickSort
-    insertionSort
 */
 public class Sort
 {
