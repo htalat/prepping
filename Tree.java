@@ -53,6 +53,45 @@ public class Tree
 		return r;
 	}
 	//--------------------------------------------------------------
+	//	http://quiz.geeksforgeeks.org/binary-search-tree-set-2-delete/
+	//
+	public void delete(int d)
+	{
+		root = del(root,d);
+	}
+	private Node del(Node r ,int d)
+	{
+		if(r == null)
+			return r;
+
+		if(d < r.data)
+			r.left = del(r.left,d);
+		else if (d > r.data)
+			r.right = del(r.right,d);
+		else
+		{
+			if(r.left == null)
+				return r.right;
+			else if(r.right == null)
+				return r.left;
+
+			r.data  = minValue(r.right);
+			r.right = del(r.right,r.data); 
+
+		}
+		return r;
+	} 
+	private int minValue(Node r)
+	{
+		int min = r.data;
+		while(r != null)
+		{
+			min = r.left.data;
+			r   = r.left;
+		}
+		return min;
+	}
+	//--------------------------------------------------------------
 	public void printInOrder()
 	{
 		this.printInOrder(root);
