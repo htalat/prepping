@@ -1,73 +1,206 @@
-public class Tree 
-{	
-	Node head;
+/*
+	// numberOfNodes
+	//insert
+	//printInOrder
+	//printPreOrder
+	//iterativePrintPreOrder-commented
+	//iterativePrintInOrder-commented
+	//sumNodes
+	//lowestCommonAncestor
+	//invertTree
+
+
+*/
+import java.util.*;
+public class Tree
+{
+	Node root;
+
 	public Tree(int d)
 	{
-		head = new Node(d);
+		root = new Node(d);
 	}
-
-	public void addNode(int d){
-		head = insert(head,d);
-	}
-	private Node insert(Node root, int d)
+	//--------------------------------------------------------------
+	public int numberOfNodes()
 	{
-		if(root == null)
-			return new Node(d);
-		else
-		{
-			if(root.data < d)
-				root.right = insert(root.right,d);
-			else
-				root.left = insert(root.left,d);
-
-			return root;
-		}
+		return countNodes(root);
 	}
-	public void printInOrder(){
-		inOrderPrint(head);
-	}
-	public void inOrderPrint(Node r)
-	{
-		if(r!= null){
-			inOrderPrint(r.left);
-			System.out.println(r.data + " ");
-			inOrderPrint(r.right);
-		}
-
-	}
-	public int countNode()
-	{
-		return nodeCount(head);
-	}
-	private int nodeCount(Node r)
+	private int countNodes(Node r)
 	{
 		if(r == null)
 			return 0;
 		else
-			return 1 + nodeCount(r.left) + nodeCount(r.right);
+			return 1 + countNodes(r.left) + countNodes(r.right);
 	}
-	public int sumNode()
+
+	//--------------------------------------------------------------
+	public void insert(int d)
 	{
-		return nodeSum(head);
+		root = add(root,d);
+	}
+
+	private Node add(Node r, int d)
+	{
+		if(r == null)
+			return new Node(d);
+		else
+		{
+			if(d < r.data)
+				r.left = add(r.left,d);
+			else
+				r.right = add(r.right,d);
+		}
+		return r;
+	}
+	//--------------------------------------------------------------
+	public void printInOrder()
+	{
+		this.printInOrder(root);
+	}
+	private void printInOrder(Node r)
+	{
+		if(r == null)
+			return;
+		else
+		{
+			printInOrder(r.left);
+			System.out.println(r.data + " ");
+			printInOrder(r.right);
+		}
+	}
+	//---------------------------------------------------------------
+	public void printPreOrder()
+	{
+		this.printPreOrder(root);
+	}
+	private void printPreOrder(Node r)
+	{
+		if(r == null)
+			return;
+		else
+		{
+			System.out.println(r.data + " ");
+			printPreOrder(r.left);
+			printPreOrder(r.right);
+		}
+	}
+	//---------------------------------------------------------------
+	public void iterativePrintPreOrder()
+	{
+		/* will conflic with stack class
+       if(root == null)
+            return;
+        
+        Stack<Node> stack = new Stack<Node>();
+        stack.push(root);
+        
+        while(!stack.isEmpty())
+        {
+            Node t1 = stack.pop();
+            
+            System.out.println(t1.data+ " ");
+            
+            if(t1.right!= null)
+            {
+                stack.add(t1.right);
+            }
+            
+            if(t1.left != null)
+            {
+                stack.add(t1.left);
+            }
+        }		
+        */
+	}
+	//---------------------------------------------------------------
+	public void iterativePrintInOrder()
+	{
+		/* will conflict with stack class
+		if(root == null)
+			return;
+
+		Stack<Node> stack = new Stack<Node>();
+		Node t1 = root;
+
+		while(!stack.isEmpty() || t1 != null)
+		{
+			if(t1 != null)
+			{
+				stack.push(t1);
+				t1 = t1.left;
+			}else
+			{
+				Node t2 = stack.pop();
+				System.out.println(t2.data);
+				t1 = t2.right;
+			}
+		}
+		*/
+	}	
+	//--------------------------------------------------------------
+	public int sumNodes()
+	{
+		return nodeSum(root);
 	}
 	private int nodeSum(Node r)
 	{
-		if(r == null)
+		if(r==null)
 			return 0;
 		else
 			return r.data + nodeSum(r.left) + nodeSum(r.right);
 	}
-	public static class Node
+	//----------------------------------------------------------
+	public Node lowestCommonAncestor(Node p , Node q)
 	{
-		public int data;
-		public Node left;
-		public Node right;
+		return lca(root,p,q);
+	}
+	private Node lca(Node r , Node p , Node q)
+	{
+		if(r == null)
+			return null;
+
+		if(p.data > r.data && q.data > r.data)
+		{
+			return lca(r.right,p,q);
+		}
+		
+		if (p.data < r.data && q.data < r.data)
+		{
+			r = lca(r.left,p,q);
+		}
+		return r;
+
+	}
+	//----------------------------------------------------------
+	public Node invertTree(Node r)
+	{
+		if(r != null)
+			invert(r);
+
+		return r;
+	}
+	public void invert(Node r)
+	{
+		Node tmp = r.left;
+		r.left  = r.right;
+		r.right = tmp;
+
+		if(r.left != null)
+			invert(r.left);
+
+		if(r.right != null)
+			invert(r.right);
+	}
+	//-----------------------------------------------------------
+	public static class Node 
+	{
+		int data;
+		Node left,right;
 
 		public Node(int d)
 		{
 			data = d;
-			left =null;
-			right = null;
 		}
+
 	}
 }
