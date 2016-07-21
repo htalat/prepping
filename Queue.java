@@ -1,3 +1,12 @@
+/*
+	Queue
+	+enqueue
+	+dequeue
+	+isEmpty
+	+peek
+	+printAll
+	+Node
+*/
 public class Queue
 {
 

@@ -1,3 +1,11 @@
+/*
+	Stack
+	+push
+	+pop
+	+isEmpty
+	+printAll
+	+Node
+*/
 public class Stack
 {	
 	Node root;
