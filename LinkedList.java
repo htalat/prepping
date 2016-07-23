@@ -3,6 +3,7 @@
 	-add
 	-printList
 	-reverseList
+	+delete
 	-Node
 */
 public class LinkedList
@@ -61,6 +62,27 @@ public class LinkedList
                 break;
         }
         return b;
+    }
+
+    public void delete(int key)
+    {
+        Node tmp = head;
+        Node prev = null;
+ 
+        if (tmp != null && tmp.data == key)
+        {
+            head = tmp.next; 
+            return;
+        }
+        while (tmp != null && tmp.data != key)
+        {
+            prev = tmp;
+            tmp = tmp.next;
+        }    
+        if (tmp == null) 
+        	return;
+ 
+        prev.next = tmp.next;
     }
 
 
