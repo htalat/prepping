@@ -176,7 +176,7 @@ public class Sort
 
     //------------------------------------------------------------
 	
-    public void insertionSort(int arr[]) 
+    public void insertionSort(int[] arr) 
     {
         int n = arr.length;
 
